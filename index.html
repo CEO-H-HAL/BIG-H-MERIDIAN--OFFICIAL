@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Big H Meridian | Reaching the Peak of Learning & Digital Excellence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* ===== LOADING SCREEN ===== */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-logo {
+            text-align: center;
+        }
+
+        .logo-container {
+            background: white;
+            border-radius: 50%;
+            padding: 50px 40px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 3px solid #f8f9fa;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .logo-main {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: #2d3436;
+            letter-spacing: 3px;
+            margin-bottom: 8px;
+        }
+
+        .logo-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            color: #2d3436;
+            font-weight: 500;
+            margin-bottom: 12px;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+        }
+
+        .logo-line {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #2d3436, transparent);
+            margin: 0 auto;
+        }
+
+        /* ===== WEBSITE STYLES ===== */
+        /* Peaceful Animated Gradient Background */
+        .background {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background: linear-gradient(-45deg, #f8f9fa, #e9ecef, #dee2e6, #f8f9fa);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Section Styling */
+        section {
+            padding: 100px 20px;
+            min-height: 70vh;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        section.active {
+            display: block;
+            opacity: 1;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4em;
+            margin-bottom: 10px;
+            color: #2d3436;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            color: #2d3436;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        h3 {
+            font-family: 'Playfair Display', serif;
+            color: #2d3436;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5.5em;
+            margin-bottom: 0;
+            color: #2d3436;
+        }
+
+        .tagline {
+            font-size: 1.3em;
+            margin-bottom: 50px;
+            color: #636e72;
+            font-style: italic;
+            letter-spacing: 2px;
+        }
+
+        .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5em;
+            color: #2d3436;
+            margin: 30px 0;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 15px 35px;
+            background-color: #2d3436;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 3px;
+            font-weight: 500;
+            margin: 10px;
+            transition: all 0.4s ease;
+            border: 2px solid #2d3436;
+            letter-spacing: 1px;
+        }
+
+        .button:hover {
+            background-color: transparent;
+            color: #2d3436;
+            transform: translateY(-3px);
+        }
+
+        .button.secondary {
+            background-color: transparent;
+            color: #2d3436;
+        }
+
+        .button.secondary:hover {
+            background-color: #2d3436;
+            color: #fff;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            backdrop-filter: blur(10px);
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            margin: 0 20px;
+            font-size: 1em;
+            cursor: pointer;
+            padding: 12px 25px;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: #2d3436;
+        }
+
+        nav button:hover, nav button.active {
+            background-color: #2d3436;
+            color: #fff;
+        }
+
+        /* Content Cards */
+        .card {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 40px;
+            margin: 30px auto;
+            max-width: 700px;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Elegant divider */
+        .divider {
+            width: 100px;
+            height: 2px;
+            background: #2d3436;
+            margin: 40px auto;
+            opacity: 0.3;
+        }
+
+        /* Email Link Styling */
+        .email-link {
+            color: #2d3436;
+            font-size: 1.2em;
+            text-decoration: none;
+            border-bottom: 1px solid #2d3436;
+            padding-bottom: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .email-link:hover {
+            color: #636e72;
+            border-bottom-color: #636e72;
+        }
+
+        /* Instagram Link Styling */
+        .instagram-link {
+            color: #2d3436;
+            font-size: 1.2em;
+            text-decoration: none;
+            border-bottom: 1px solid #2d3436;
+            padding-bottom: 2px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 10px 0;
+        }
+
+        .instagram-link:hover {
+            color: #E1306C;
+            border-bottom-color: #E1306C;
+            transform: translateY(-2px);
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #2d3436;
+        }
+
+        .service-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #2d3436;
+        }
+
+        /* Process Steps */
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            padding: 20px;
+            margin: 10px;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: #2d3436;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-weight: bold;
+        }
+
+        /* Pricing Styles */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .pricing-card.featured {
+            border: 2px solid #2d3436;
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2d3436;
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .price-amount {
+            font-family: 'Playfair Display', serif;
+            font-size: 3em;
+            color: #2d3436;
+            margin: 20px 0;
+        }
+
+        .price-period {
+            color: #636e72;
+            font-size: 1em;
+            margin-bottom: 30px;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .feature-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(45, 52, 54, 0.1);
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #2d3436;
+            font-weight: bold;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Social Media Section */
+        .social-section {
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .social-handle {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5em;
+            color: #2d3436;
+            margin: 15px 0;
+        }
+
+        .social-subtitle {
+            color: #636e72;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loading-logo">
+            <div class="logo-container">
+                <div class="logo-main">BIG H</div>
+                <div class="logo-subtitle">MERIDIAN</div>
+                <div class="logo-line"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Website Content -->
+    <div class="background"></div>
+
+    <nav>
+        <button onclick="showSection('home')" class="active">Home</button>
+        <button onclick="showSection('products')">Products</button>
+        <button onclick="showSection('services')">Web Design</button>
+        <button onclick="showSection('pricing')">Pricing</button>
+        <button onclick="showSection('mission')">Mission</button>
+        <button onclick="showSection('about')">About</button>
+        <button onclick="showSection('contact')">Contact</button>
+    </nav>
+
+    <section id="home" class="active">
+        <div style="padding-top: 120px;">
+            <h1 class="logo">Big H Meridian</h1>
+            <p class="tagline">Reaching the Peak of Learning & Digital Excellence</p>
+            <p style="font-size: 1.2em; color: #636e72; max-width: 600px; margin: 0 auto 40px;">
+                Where ambitious minds connect to achieve brilliance through education and technology.
+            </p>
+            
+            <!-- Instagram added to home section -->
+            <div class="social-section">
+                <p class="social-subtitle">Follow our journey from classroom to CEO</p>
+                <div class="social-handle">CEO@BigHMeridianOfficial</div>
+                <a href="https://www.instagram.com/ceo_big_h_meridian_official/" target="_blank" class="instagram-link">
+                    Follow on Instagram 🌟
+                </a>
+                <p style="margin-top: 15px; color: #636e72; font-size: 0.9em;">
+                    See behind-the-scenes, web design tips, and our latest projects!
+                </p>
+            </div>
+            
+            <button class="button" onclick="showSection('pricing')">View Pricing</button>
+            <button class="button secondary" onclick="showSection('services')">Web Design Services</button>
+        </div>
+    </section>
+
+    <section id="products">
+        <h2>Our Educational Creations</h2>
+        <div class="card">
+            <h3>Big H Hindi</h3>
+            <p>A platform designed to guide learners to peak mastery of Hindi. Through intuitive design and carefully crafted content, we make mastering a new language a journey of excellence.</p>
+            <button class="button" onclick="window.open('https://learn-hindi-by-halima-s-hub.web.app/', '_blank')">Experience the Platform</button>
+        </div>
+        <p style="color: #636e72; font-style: italic;">More subjects in development, charting new paths to knowledge.</p>
+    </section>
+
+    <section id="services">
+        <h2>Web Design Services</h2>
+        <div class="card">
+            <p style="font-size: 1.2em; margin-bottom: 30px;">
+                We build stunning, professional websites for businesses, educators, students, and organizations of all sizes. Your digital presence should reflect your ambition.
+            </p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">💼</div>
+                    <div class="service-title">Business Websites</div>
+                    <p>Professional sites that convert visitors into customers and showcase your brand's excellence.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🎓</div>
+                    <div class="service-title">Educational Platforms</div>
+                    <p>Engaging learning environments for schools, teachers, and educational content creators.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🛍️</div>
+                    <div class="service-title">Product Showcase Sites</div>
+                    <p>Beautiful online catalogs to display your products and generate customer inquiries.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <div class="service-title">Portfolio Sites</div>
+                    <p>Elegant portfolios for creatives, professionals, and students to showcase their work.</p>
+                </div>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <h3>Our Process</h3>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h4>Consultation</h4>
+                    <p>We discuss your vision, goals, and requirements.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h4>Design</h4>
+                    <p>We create mockups and prototypes for your approval.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h4>Development</h4>
+                    <p>We build your website with clean, efficient code.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h4>Launch</h4>
+                    <p>We deploy your site and ensure everything works perfectly.</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <button class="button" onclick="showSection('pricing')">See Pricing & Packages</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing">
+        <h2>Web Design Packages</h2>
+        <div class="card">
+            <p style="font-size: 1.2em; text-align: center; margin-bottom: 40px;">
+                Professional website solutions at competitive prices. All packages include mobile optimization and 30 days of support.
+            </p>
+            
+            <div class="pricing-grid">
+                <!-- Starter Package -->
+                <div class="pricing-card">
+                    <h3>Starter Website</h3>
+                    <div class="price-amount">$299</div>
+                    <div class="price-period">one-time payment</div>
+                    <ul class="feature-list">
+                        <li>1-3 Page Website</li>
+                        <li>Mobile-Friendly Design</li>
+                        <li>Contact Form Setup</li>
+                        <li>Basic SEO Configuration</li>
+                        <li>1 Week Delivery</li>
+                        <li>30 Days Support</li>
+                    </ul>
+                    <button class="button" onclick="showSection('contact')">Get Started</button>
+                </div>
+                
+                <!-- Business Package -->
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">MOST POPULAR</div>
+                    <h3>Business Website</h3>
+                    <div class="price-amount">$499</div>
+                    <div class="price-period">one-time payment</div>
+                    <ul class="feature-list">
+                        <li>5-7 Page Website</li>
+                        <li>Custom Design</li>
+                        <li>Advanced SEO Setup</li>
+                        <li>Social Media Integration</li>
+                        <li>Google Analytics</li>
+                        <li>2 Week Delivery</li>
+                        <li>60 Days Support</li>
+                    </ul>
+                    <button class="button" onclick="showSection('contact')">Choose Plan</button>
+                </div>
+                
+                <!-- Product Showcase Package -->
+                <div class="pricing-card">
+                    <h3>Product Showcase</h3>
+                    <div class="price-amount">$399</div>
+                    <div class="price-period">one-time payment</div>
+                    <ul class="feature-list">
+                        <li>10-15 Product Pages</li>
+                        <li>Beautiful Product Galleries</li>
+                        <li>Inquiry Contact Forms</li>
+                        <li>Mobile-Optimized Layout</li>
+                        <li>Basic SEO Setup</li>
+                        <li>2 Week Delivery</li>
+                        <li>45 Days Support</li>
+                    </ul>
+                    <button class="button" onclick="showSection('contact')">Get Quote</button>
+                </div>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <p><strong>All packages include:</strong> Free domain consultation, mobile optimization, and professional design</p>
+                <p style="color: #636e72; font-style: italic; margin-top: 20px;">
+                    Need something custom? Contact us for personalized quotes on larger projects or ongoing maintenance plans.
+                </p>
+                <button class="button secondary" onclick="showSection('contact')" style="margin-top: 20px;">
+                    Request Custom Quote
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="mission">
+        <h2>Our Philosophy</h2>
+        <div class="card">
+            <p>Every learner has a peak potential. Our mission is to be the meridian—the guiding line—that connects them to it.</p>
+            <div class="divider"></div>
+            <p>Big H Meridian was founded on the belief that education should be a strategic ascent. We create the tools and maps for learners to navigate their journey and reach their highest point of achievement.</p>
+            <div class="divider"></div>
+            <p>Through our web design services, we extend this philosophy to help businesses and individuals establish their digital presence with the same commitment to excellence.</p>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>The Visionary</h2>
+        <div class="card">
+            <p style="font-size: 1.1em; margin-bottom: 30px;">
+                "Great websites shouldn't be complicated or expensive. I combine modern design with business strategy to create digital presences that actually work for small businesses and entrepreneurs."
+            </p>
+            <div class="signature">Halima Hussain Sayed</div>
+            <p><em>Founder & Chief Executive Officer</em></p>
+            <div class="divider"></div>
+            <p>At just 14 years old, Halima founded Big H Meridian with a simple mission: to make professional web design accessible to everyone. What started as an educational venture quickly evolved into a full-service web design agency serving businesses of all sizes.</p>
+            
+            <p>Recognizing that many small businesses struggle with outdated or ineffective websites, Halima expanded the company's focus to provide affordable, modern web solutions that help businesses thrive online.</p>
+            
+            <p>"I believe every business deserves a website that reflects their ambition and drives real results. Whether you're a local shop, a startup, or an established company, we're here to build your digital foundation for success."</p>
+            
+            <!-- Instagram added to About section -->
+            <div class="social-section">
+                <p class="social-subtitle">Follow my journey from classroom to CEO</p>
+                <div class="social-handle">CEO@BigHMeridianOfficial</div>
+                <a href="https://www.instagram.com/ceo_big_h_meridian_official/" target="_blank" class="instagram-link">
+                    Connect with me on Instagram
+                </a>
+                <p style="margin-top: 15px; color: #636e72; font-size: 0.9em;">
+                    Daily updates, web design tips, and behind-the-scenes of running a business at 14!
+                </p>
+            </div>
+            
+            <div style="background: rgba(45, 52, 54, 0.05); padding: 20px; border-radius: 10px; margin: 30px 0;">
+                <h4 style="color: #2d3436; margin-bottom: 15px;">Our Business Philosophy</h4>
+                <ul style="text-align: left; color: #636e72;">
+                    <li><strong>Quality & Affordability:</strong> Professional design shouldn't break the bank</li>
+                    <li><strong>Modern & Mobile-First:</strong> Websites that work perfectly on all devices</li>
+                    <li><strong>Results-Driven:</strong> Every site is built with your business goals in mind</li>
+                    <li><strong>Student Innovation:</strong> Fresh perspectives meet professional execution</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Begin the Conversation</h2>
+        <div class="card">
+            <p>Ready to start your web design project? Contact us for a free consultation and detailed quote.</p>
+            
+            <div style="margin: 40px 0;">
+                <p><strong>Email us for pricing and availability:</strong></p>
+                <a href="mailto:CEOatBigHMeridian@gmail.com" class="email-link">CEOatBigHMeridian@gmail.com</a>
+            </div>
+
+            <!-- Instagram added to Contact section -->
+            <div style="margin: 40px 0;">
+                <p><strong>Follow our journey on Instagram:</strong></p>
+                <div class="social-handle" style="font-size: 1.3em; margin: 10px 0;">CEO@BigHMeridianOfficial</div>
+                <a href="https://www.instagram.com/ceo_big_h_meridian_official/" target="_blank" class="instagram-link">
+                    Visit our Instagram Profile
+                </a>
+                <p style="color: #636e72; margin-top: 10px; font-size: 0.9em;">
+                    See our latest projects and get web design tips!
+                </p>
+            </div>
+
+            <p style="color: #636e72; margin-top: 30px;">
+                We'll respond within 24 hours to discuss your project requirements and provide a detailed quote.
+            </p>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <button class="button" onclick="window.location.href='mailto:CEOatBigHMeridian@gmail.com?subject=Web Design Quote Request&body=Hi, I am interested in your web design services. Please send me more information about pricing and availability.'">Request Detailed Quote</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Show loading screen for 2 seconds, then show main website
+        setTimeout(function() {
+            document.getElementById('loading-screen').style.opacity = '0';
+            setTimeout(function() {
+                document.getElementById('loading-screen').style.display = 'none';
+            }, 500);
+        }, 2000);
+
+        // Navigation function
+        function showSection(sectionId) {
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+            
+            document.querySelectorAll('nav button').forEach(button => {
+                button.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
